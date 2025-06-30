@@ -1,7 +1,7 @@
 import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from '@/components/expo/ThemedText';
+import { ThemedView } from '@/components/expo/ThemedView';
 import { ScrollView } from 'react-native-gesture-handler';
 
 export default function RegisterScreen() {
