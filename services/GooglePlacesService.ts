@@ -1,8 +1,8 @@
 import googleAPIKey from "@/googleAPIKeys"
 import IGooglePlacesSearchCircle from "@/types/IGooglePlacesSearchCircle"
 import IAutocompleteRequestBody from "@/types/requests/IAutoCompleteRequestBody"
-import IGooglePlaceResponse from "@/types/responses/IGooglePlaceResponse"
-import IGooglePlacesAutocompleteResponse from "@/types/responses/IGooglePlacesAutocompleteResponse"
+import IGooglePlaceResponse from "@/types/responses/IGooglePlacePartial"
+import IGooglePlacesAutocompleteResponse, { TSuggestion } from "@/types/responses/IGooglePlacesAutocompleteResponse"
 
 export default class GooglePlacesService{
 
@@ -29,8 +29,9 @@ export default class GooglePlacesService{
         'place' : 'https://places.googleapis.com/v1/places/'
     }
 
-    async getAutocompleteSuggestions(input : string, circle : IGooglePlacesSearchCircle) : Promise<IGooglePlacesAutocompleteResponse>{
-        if (input.length < 3) return { suggestions: [] }
+    // !!! should return the content of suggestions instead of an object with the suggestions property
+    async getAutocompleteSuggestions(input : string, circle : IGooglePlacesSearchCircle) : Promise<TSuggestion[]>{
+        if (input.length < 3) return []
         try{
             const response = await fetch(this.APIUrls.autocomplete, {
                 method: 'POST',
@@ -47,10 +48,10 @@ export default class GooglePlacesService{
                 );
             }
             const data = (await response.json()) as IGooglePlacesAutocompleteResponse
-            return data   
+            return data.suggestions  
         } catch (error : unknown){
             console.error(error)
-            return {suggestions : []}
+            return []
         }
     }
 
@@ -75,6 +76,16 @@ export default class GooglePlacesService{
         } catch (error : unknown){
             console.error(error)
             return null
+        }
+    }
+
+    async getPlacesDetailsForTargetPlaces(placeIds : string[]) : Promise<IGooglePlaceResponse[]>{
+        try{
+            const promisesDetails = Promise.all(placeIds.map(placeId => this.getPlaceDetails(placeId)))
+            return (await promisesDetails).filter(promise => promise != null)
+        } catch (error : unknown){
+            console.error(error)
+            return []
         }
     }
 }
