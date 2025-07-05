@@ -1,9 +1,9 @@
-import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
 
 import CustomFormInput from '@/components/CustomFormInput';
 import { ThemedText } from '@/components/expo/ThemedText';
+import { ThemedView } from '@/components/expo/ThemedView';
 import { useState } from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
 
 export default function LoginScreen() {
 
@@ -17,22 +17,27 @@ export default function LoginScreen() {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             keyboardVerticalOffset={0}
         >
-            <ScrollView style={styles.scrollView}>
+            <ScrollView 
+                contentContainerStyle={styles.scrollView}
+                keyboardShouldPersistTaps="handled"
+            >
+                <ThemedView style={styles.mainContainer}>
                 <ThemedText type="title">Login</ThemedText>
-                <CustomFormInput
-                    style={{fontSize:16, fontFamily:'Jost_400Regular'}}
-                    active={focus === "email"}
-                    placeholder={focus === "email" ? "" : "Email"}
-                    value={form.email}
-                    onChangeText={(email: string) => setForm(prevForm => ({...prevForm, email}))}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    containerStyle={{...styles.input, columnGap : 10}}
-                    accessibilityLabel="Champ email"
-                    placeholderTextColor={'#545454'}
-                    onFocus={() => setFocus("email")}
-                    onBlur={() => setFocus(null)}
-                />
+                    <CustomFormInput
+                        style={{fontSize:16, fontFamily:'Jost_400Regular'}}
+                        active={focus === "email"}
+                        placeholder={focus === "email" ? "" : "Email"}
+                        value={form.email}
+                        onChangeText={(email: string) => setForm(prevForm => ({...prevForm, email}))}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                        containerStyle={{...styles.input, columnGap : 10}}
+                        accessibilityLabel="Champ email"
+                        placeholderTextColor={'#8E8E93'}
+                        onFocus={() => setFocus("email")}
+                        onBlur={() => setFocus(null)}
+                    />
+                </ThemedView>
             </ScrollView>
         </KeyboardAvoidingView>
     );
@@ -44,10 +49,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center',
     },
+    mainContainer:{
+        flex:1, 
+        width:'100%', 
+        flexDirection:'column', 
+        alignItems:'center', 
+        padding: 20,
+        fontFamily:'Jost_400Regular',
+    },
     input:{
-        backgroundColor:'#F4F4F5',
+        backgroundColor:'#F2F2F7',
         borderWidth: 1,
-        borderColor: '#CDD3D8',
+        borderColor: '#D1D1D6',
         borderStyle: 'solid',
         paddingHorizontal : 15,
         borderRadius:8,
