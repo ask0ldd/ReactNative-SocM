@@ -17,7 +17,7 @@ export default class StorageService{
         }
     }
 
-    async resetItems(items : string[]){
+    async flushItems(items : string[]){
         try{
             for(const item of items){
                 await AsyncStorage.removeItem(item)

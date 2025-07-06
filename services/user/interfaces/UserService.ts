@@ -24,4 +24,6 @@ export interface UserService {
   /*insert(user : Omit<IUser, 'id'>) : Promise<IUser>
   updateByUID(uid : string, user : Omit<IUser, 'id'>) : Promise<IUser>
   deleteByUID(uid : string) : Promise<void>*/
+
+  insertOnboardingData() : Promise<void>
 }

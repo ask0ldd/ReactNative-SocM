@@ -112,4 +112,8 @@ export default class FirebaseUserService implements UserService{
         }
     }
 
+    async insertOnboardingData() : Promise<void>{
+
+    }
+
 }

@@ -1,4 +1,4 @@
-import googleAPIKey from "@/googleAPIKeys"
+import { googleAPIKey } from "@/googleAPIKeys"
 import IGooglePlacesSearchCircle from "@/types/IGooglePlacesSearchCircle"
 import IAutocompleteRequestBody from "@/types/requests/IAutoCompleteRequestBody"
 import IGooglePlaceResponse from "@/types/responses/IGooglePlacePartial"
