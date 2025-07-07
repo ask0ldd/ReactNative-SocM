@@ -9,6 +9,7 @@ interface DisplayName {
 }
 
 export default interface IGooglePlacePartial {
+  googlePlaceId: string
   formattedAddress: string
   location: Location
   displayName: DisplayName
