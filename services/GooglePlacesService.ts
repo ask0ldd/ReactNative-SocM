@@ -66,13 +66,13 @@ export default class GooglePlacesService{
                 },
             })
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
+                const errorData = await response.json().catch(() => ({}))
                 throw new Error(
                     `Google Places Details failed: ${response.status} ${response.statusText} - ${JSON.stringify(errorData)}`
-                );
+                )
             }
-            const data = (await response.json()) as IGooglePlaceResponse
-            return data  
+            const data = (await response.json()) as Omit<IGooglePlaceResponse, "googlePlaceId">
+            return {...data, googlePlaceId : placeId}
         } catch (error : unknown){
             console.error(error)
             return null
