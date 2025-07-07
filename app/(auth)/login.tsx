@@ -1,5 +1,6 @@
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet } from 'react-native';
 
+import CustomButton from '@/components/CustomButton';
 import CustomFormInput from '@/components/CustomFormInput';
 import { ThemedText } from '@/components/expo/ThemedText';
 import { ThemedView } from '@/components/expo/ThemedView';
@@ -22,7 +23,7 @@ export default function LoginScreen() {
                 keyboardShouldPersistTaps="handled"
             >
                 <ThemedView style={styles.mainContainer}>
-                <ThemedText type="title">Login</ThemedText>
+                    <ThemedText>Login</ThemedText>
                     <CustomFormInput
                         style={{fontSize:16, fontFamily:'Jost_400Regular'}}
                         active={focus === "email"}
@@ -37,6 +38,21 @@ export default function LoginScreen() {
                         onFocus={() => setFocus("email")}
                         onBlur={() => setFocus(null)}
                     />
+                    <CustomFormInput
+                        style={{fontSize:16, fontFamily:'Jost_400Regular'}}
+                        active={focus === "password"}
+                        placeholder={focus === "password" ? "" : "Password"}
+                        value={form.password}
+                        onChangeText={(password: string) => setForm(prevForm => ({...prevForm, password}))}
+                        keyboardType="default"
+                        autoCapitalize="none"
+                        containerStyle={{...styles.input, columnGap : 10, marginTop:15}}
+                        accessibilityLabel="Champ password"
+                        placeholderTextColor={'#8E8E93'}
+                        onFocus={() => setFocus("password")}
+                        onBlur={() => setFocus(null)}
+                    />
+                    <CustomButton gradient={} title={'Login'} onPress={() => void 0}/>
                 </ThemedView>
             </ScrollView>
         </KeyboardAvoidingView>
@@ -46,14 +62,14 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
     scrollView :{ 
         flexGrow: 1, 
+        flexDirection:'column',
         justifyContent: 'center', 
         alignItems: 'center',
     },
     mainContainer:{
-        flex:1, 
         width:'100%', 
+        flex: 1,
         flexDirection:'column', 
-        alignItems:'center', 
         padding: 20,
         fontFamily:'Jost_400Regular',
     },
@@ -71,7 +87,6 @@ const styles = StyleSheet.create({
     },
     form:{
         flexDirection:'column', 
-        rowGap:20,
         marginTop:30,
         width:'100%'
     },
