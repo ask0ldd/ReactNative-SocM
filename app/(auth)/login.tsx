@@ -27,11 +27,11 @@ export default function LoginScreen() {
                 <Image 
                   source={colorScheme === "dark" ? require('@/assets/images/figma.png') : require('@/assets/images/figma.png')} 
                   resizeMode="cover" 
-                  style={{width: '100%', height:325}}
+                  style={{width: '100%', height:325, opacity:70}}
                 />
                 <ThemedView style={styles.mainContainer}>
                     <ThemedView style={styles.form}>
-                        <ThemedText style={{fontFamily:'Jost_600SemiBold', fontSize:24, lineHeight:32}}>Login</ThemedText>
+                        <ThemedText style={{fontFamily:'Jost_600SemiBold', fontSize:24, lineHeight:32}}>LOGIN</ThemedText>
                         <CustomFormInput
                             style={{fontSize:16, fontFamily:'Jost_400Regular'}}
                             active={focus === "email"}
@@ -100,12 +100,12 @@ const styles = StyleSheet.create({
         height:55,
         color:'#323232',
         fontFamily:'Jost_400Regular',
-        fontSize:16
+        fontSize:16,
     },
     form:{
         flexDirection:'column', 
         marginTop:20,
-        width:'100%'
+        width:'100%',
     },
     sendButton:{
         marginTop:20, 
