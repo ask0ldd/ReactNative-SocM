@@ -41,5 +41,7 @@ app-example
 INSTALL.md
 
 googleAPIKeys.ts
+firebase.ts
+google-services.json
 
 android
