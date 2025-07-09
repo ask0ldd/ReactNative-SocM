@@ -1,9 +1,10 @@
-import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, useColorScheme } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, useColorScheme } from 'react-native';
 
 import CustomButton from '@/components/CustomButton';
 import CustomFormInput from '@/components/CustomFormInput';
 import { ThemedText } from '@/components/expo/ThemedText';
 import { ThemedView } from '@/components/expo/ThemedView';
+import { router } from 'expo-router';
 import { useState } from 'react';
 
 export default function LoginScreen() {
@@ -53,6 +54,8 @@ export default function LoginScreen() {
                             value={form.password}
                             onChangeText={(password: string) => setForm(prevForm => ({...prevForm, password}))}
                             keyboardType="default"
+                            textContentType="password"
+                            secureTextEntry={true}
                             autoCapitalize="none"
                             containerStyle={{...styles.input, columnGap : 10, marginTop:20}}
                             accessibilityLabel="Champ password"
@@ -68,6 +71,7 @@ export default function LoginScreen() {
                             onPress={() => void 0}
                             styles={{button: styles.sendButton, text:{color : '#ffffff', fontSize:16, fontFamily:'Jost_600SemiBold'}}}
                         />
+                        <Pressable onPress={() => router.push('/(auth)/register')}><ThemedText>Register</ThemedText></Pressable>
                     </ThemedView>
                 </ThemedView>
             </ScrollView>
