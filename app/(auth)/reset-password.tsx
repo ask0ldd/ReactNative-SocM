@@ -48,8 +48,41 @@ export default function ResetPasswordScreen() {
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
+  scrollView :{ 
+      flexGrow: 1, 
+      flexDirection:'column',
+      justifyContent: 'center', 
+      alignItems: 'center',
   },
+  mainContainer:{
+      width:'100%', 
+      flex: 1,
+      flexDirection:'column', 
+      paddingHorizontal: 20,
+      paddingBottom:20,
+      fontFamily:'Jost_400Regular',
+  },
+  input:{
+      backgroundColor:'#F2F2F7',
+      borderWidth: 1,
+      borderColor: '#D1D1D6',
+      borderStyle: 'solid',
+      paddingHorizontal : 15,
+      borderRadius:8,
+      height:55,
+      color:'#323232',
+      fontFamily:'Jost_400Regular',
+      fontSize:16,
+  },
+  form:{
+      flexDirection:'column', 
+      marginTop:20,
+      width:'100%',
+  },
+  sendButton:{
+      marginTop:20, 
+      height:55,
+      shadowColor:'#007AFF',
+      elevation:4,
+  }
 });
