@@ -23,11 +23,11 @@ export default function ResetPasswordScreen() {
   async function handleRegisterFormSubmit(){
     setErrorMessage("")
     try{
-        // form verification : throws an error if verification fails
         z.email().parse(email)
         // checks by default if the email is available
-        await authService.sendPasswordResetEmail(email)
-        router.push('/(onboarding)')
+        const emailSent = await authService.sendPasswordResetEmail(email)
+        if(emailSent) return router.push('/(auth)')
+        throw new Error("Couldn't send a reset email to this address.")
     }catch(error : unknown){
         const message = parseResetPasswordFormError(error)
         setErrorMessage(message)
