@@ -1,4 +1,4 @@
-import { FirebaseAuthTypes, getAuth } from '@react-native-firebase/auth';
+import { FirebaseAuthTypes, getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 import { router } from 'expo-router';
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 
@@ -13,7 +13,7 @@ export function AuthProvider({ children } : {children : ReactNode}) {
 
   useEffect(() => {
     const auth = getAuth()
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser ?? null)
         if(currentUser == null) router.push("/(auth)/login")
     })
