@@ -4,13 +4,26 @@ import CustomButton from '@/components/CustomButton';
 import CustomFormInput from '@/components/CustomFormInput';
 import { ThemedText } from '@/components/expo/ThemedText';
 import { ThemedView } from '@/components/expo/ThemedView';
+import { TIdentityForm } from '@/zod/forms/identityFormSchema';
 import { useState } from 'react';
+
+const defaultIdentityForm : TIdentityForm = {
+    username : "",
+    firstname : "",
+    lastname : "",
+    gender : "NC",
+    dateOfBirth : {
+        day: 0,
+        month: 0,
+        year: 0,
+    }
+}
 
 export default function UserFormScreen() {
 
-    const [form, setForm] = useState<{email : string, password : string}>({email : "", password : ""})
+    const [form, setForm] = useState<TIdentityForm>(defaultIdentityForm)
 
-    const [focus, setFocus] = useState<"email" | "password" | null>(null)
+    const [focus, setFocus] = useState<"username" | "firstname" | "lastname" | "gender" | "birthDay" | "birthMonth" | "birthYear" | null>(null)
 
     const colorScheme = useColorScheme()
 
@@ -34,30 +47,16 @@ export default function UserFormScreen() {
                         <ThemedText style={{fontFamily:'Jost_600SemiBold', fontSize:24, lineHeight:32}}>LOGIN</ThemedText>
                         <CustomFormInput
                             style={{fontSize:16, fontFamily:'Jost_400Regular'}}
-                            active={focus === "email"}
-                            placeholder={focus === "email" ? "" : "Email"}
-                            value={form.email}
-                            onChangeText={(email: string) => setForm(prevForm => ({...prevForm, email}))}
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                            containerStyle={{...styles.input, columnGap : 10, marginTop:10}}
-                            accessibilityLabel="Champ email"
-                            placeholderTextColor={'#8E8E93'}
-                            onFocus={() => setFocus("email")}
-                            onBlur={() => setFocus(null)}
-                        />
-                        <CustomFormInput
-                            style={{fontSize:16, fontFamily:'Jost_400Regular'}}
-                            active={focus === "password"}
-                            placeholder={focus === "password" ? "" : "Password"}
-                            value={form.password}
-                            onChangeText={(password: string) => setForm(prevForm => ({...prevForm, password}))}
+                            active={focus === "username"}
+                            placeholder={focus === "username" ? "" : "Username"}
+                            value={form.username}
+                            onChangeText={(username: string) => setForm(prevForm => ({...prevForm, username}))}
                             keyboardType="default"
                             autoCapitalize="none"
-                            containerStyle={{...styles.input, columnGap : 10, marginTop:20}}
-                            accessibilityLabel="Champ password"
+                            containerStyle={{...styles.input, columnGap : 10, marginTop:10}}
+                            accessibilityLabel="Champ username"
                             placeholderTextColor={'#8E8E93'}
-                            onFocus={() => setFocus("password")}
+                            onFocus={() => setFocus("username")}
                             onBlur={() => setFocus(null)}
                         />
                         <CustomButton gradient={{
